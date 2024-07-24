@@ -13,10 +13,16 @@ import utils
 from utils import *
 from train_utils import batchify_data, run_epoch, train_model
 
+
+from torchvision import datasets, transforms
+
+
+
+
 def main():
     # Load the dataset
     num_classes = 10
-    X_train, y_train, X_test, y_test = get_MNIST_data()
+    X_train, y_train, X_test, y_test = utils.get_MNIST_data()
 
     # Split into train and dev
     dev_split_index = int(9 * len(X_train) / 10)
@@ -39,9 +45,9 @@ def main():
     #################################
     ## Model specification TODO
     model = nn.Sequential(
-              nn.Linear(784, 10),
-              nn.ReLU(),
-              nn.Linear(10, 10),
+              nn.Linear(784, 128),
+              nn.LeakyReLU(),
+              nn.Linear(128, 10),
             )
     lr=0.1
     momentum=0
